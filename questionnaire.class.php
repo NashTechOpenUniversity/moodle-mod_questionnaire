@@ -1620,6 +1620,7 @@ class questionnaire {
                 } else {
                     $dependants = [];
                 }
+                $this->questions[$questionid]->set_isprint($referer === 'print');
                 $output .= $this->renderer->question_output($this->questions[$questionid], $this->responses[0] ?? [],
                     $i++, null, $dependants);
                 $this->page->add_to_page('questions', $output);

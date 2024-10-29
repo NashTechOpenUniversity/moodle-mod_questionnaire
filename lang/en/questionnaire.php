@@ -421,6 +421,7 @@ $string['previouspage'] = 'Previous Page';
 $string['print'] = 'Print this Response';
 $string['printblank'] = 'Print Blank';
 $string['printblanktooltip'] = 'Opens printer-friendly window with blank Questionnaire';
+$string['printstrictdateformatting'] = 'Enter the date';
 $string['printtooltip'] = 'Opens printer-friendly window with current Response';
 
 $string['privacy:metadata:questionnaire_response'] = 'A response in progress or submitted';
