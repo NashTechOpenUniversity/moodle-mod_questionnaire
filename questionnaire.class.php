@@ -423,6 +423,9 @@ class questionnaire {
         }
         $pdf = ($outputtarget == 'pdf') ? true : false;
         foreach ($this->questions as $question) {
+            if (self::isDependentOnChoices($question, $this->responses[$rid]->answers)) {
+                continue;
+            }
             if ($question->type_id < QUESPAGEBREAK) {
                 $i++;
             }
@@ -4175,5 +4178,27 @@ class questionnaire {
                 WHERE u.id = ?";
         $row = $DB->get_record_sql($sql, array_merge($params, [$userid]));
         return $row;
+    }
+
+    /**
+     * Determines if a question is dependent on another question's choice.
+     *
+     * Checks if the provided question has dependencies on other questions
+     * and if any required answer choices have not been selected.
+     *
+     * @param object $question The question object containing dependencies
+     * @param array $answers   An associative array of answers with question IDs as keys
+     *
+     * @return bool True if the question has an unmet dependency; otherwise, false
+     */
+    public static function isDependentOnChoices(object $question, array $answers): bool {
+        if (!empty($question->dependencies)) {
+            foreach ($question->dependencies as $dependency) {
+                if (empty($answers[$dependency->dependquestionid][$dependency->dependchoiceid])) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
