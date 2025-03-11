@@ -423,7 +423,7 @@ class questionnaire {
         }
         $pdf = ($outputtarget == 'pdf') ? true : false;
         foreach ($this->questions as $question) {
-            if (self::isDependentOnChoices($question, $this->responses[$rid]->answers)) {
+            if (self::is_dependent_on_choices($question, $this->responses[$rid]->answers)) {
                 continue;
             }
             if ($question->type_id < QUESPAGEBREAK) {
@@ -4204,7 +4204,7 @@ class questionnaire {
      *
      * @return bool True if the question has an unmet dependency; otherwise, false
      */
-    public static function isDependentOnChoices(object $question, array $answers): bool {
+    public static function is_dependent_on_choices(object $question, array $answers): bool {
         if (!empty($question->dependencies)) {
             foreach ($question->dependencies as $dependency) {
                 if (empty($answers[$dependency->dependquestionid][$dependency->dependchoiceid])) {
