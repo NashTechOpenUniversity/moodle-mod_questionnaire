@@ -4,8 +4,7 @@ Feature: Rate scale questions have Other option
   As a teacher
   the 'Other' option should display with textbox next to it in the question view
 
-  @javascript
-  Scenario: Create a rate question type with an 'Other' choice and verify the response exists
+  Background: Create a rate question type with an 'Other' choice
     Given the following "users" exist:
       | username | firstname | lastname | email                |
       | teacher1 | Teacher   | 1        | teacher1@example.com |
@@ -36,6 +35,8 @@ Feature: Rate scale questions have Other option
     And I should see "What are your top three movies?"
     And I log out
 
+  @javascript
+  Scenario: The student inputs text in "Other" and verifies its existence.
     And I log in as "student1"
     And I am on "Course 1" course homepage
     And I follow "Test questionnaire"
@@ -55,4 +56,4 @@ Feature: Rate scale questions have Other option
     And I am on "Course 1" course homepage
     And I follow "Test questionnaire"
     And I navigate to "View all responses" in current page administration
-    Then I should see "Once Upon a Time(3)"
+    Then I should see "Other: Once Upon a Time"
