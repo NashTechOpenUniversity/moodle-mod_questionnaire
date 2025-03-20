@@ -54,18 +54,18 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox('questionnaire/allowemailreporting',
         get_string('configemailreporting', 'questionnaire'), get_string('configemailreportinglong', 'questionnaire'), 0));
 
-    // Manage old responses after. The default value is 24 months.
-    $options = questionnaire_create_remove_options();
-    $settings->add(new admin_setting_configselect('questionnaire/removeoldresponses',
-            get_string('removeoldresponsesafter', 'questionnaire'),
-            get_string('configremoveoldresponses', 'questionnaire'), 0, $options));
-
+    // Delete old responses after. The default value is 24 months.
     $options = [
-        '0' => new lang_string('disabled', 'questionnaire'),
-        '1' => new lang_string('enabled', 'questionnaire'),
+            '0' => new lang_string('disabled', 'questionnaire'),
+            '1' => new lang_string('enabled', 'questionnaire'),
     ];
     $name = get_string('autodeletereponse', 'questionnaire');
     $desc = get_string('autodeletereponse_desc', 'questionnaire');
     $setting = new admin_setting_configselect('questionnaire/autodeleteresponse', $name, $desc, 0, $options);
     $settings->add($setting);
+
+    $options = questionnaire_create_remove_options();
+    $settings->add(new admin_setting_configselect('questionnaire/removeoldresponses',
+            get_string('removeoldresponsesafter', 'questionnaire'),
+            get_string('configremoveoldresponses', 'questionnaire'), 0, $options));
 }

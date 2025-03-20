@@ -145,7 +145,7 @@ class mod_questionnaire_mod_form extends moodleform_mod {
         // Remove old responses.
         $isautodelete = (bool) get_config('questionnaire', 'autodeleteresponse');
         if ($isautodelete) {
-            $options = questionnaire_create_remove_options();
+            $options = $this->create_remove_options();
             $mform->addElement('header', 'responsehdr', get_string('removeoldresponses', 'questionnaire'));
             $mform->addElement('select', 'removeafter',
                     get_string('removeoldresponsesafter', 'questionnaire'), $options);
